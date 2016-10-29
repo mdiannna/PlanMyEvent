@@ -10,6 +10,8 @@ from settings import db_path
 app = Flask(__name__)
 app.secret_key = "secret"
 
+# os.getenv('DATABASE_URL', 'sqlite:///app.sqlite')
+
 app.config['SQLALCHEMY_DATABASE_URI'] = db_path
 app.config['DEBUG'] = True
 

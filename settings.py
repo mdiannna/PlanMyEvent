@@ -1,1 +1,1 @@
-db_path ="sqlite:///database.db"
+db_path ="sqlite:////home/mdiannna/StartupWeekendBucharest/BookMyEvent/database.db"
