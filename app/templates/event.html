@@ -1,0 +1,18 @@
+
+
+{% block content %}
+<form class="form" action="/event" method="POST">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<H1 align="center">Create new event</H1>	
+				<div class = "form-group input">
+					{{form.name.label}}
+					{{form.name(class_="form-control", placeholder="name...")}}
+				</div>
+				<div align="center">
+					{{form.submit(class_="btn btn-primary btn-lg")}}
+				</div>
+		</div>
+	</div>
+</form>
+{% endblock %}
