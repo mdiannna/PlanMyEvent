@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask.ext.wtf import Form
-from wtforms import TextField, TextAreaField,  SubmitField, PasswordField, IntegerField
+from wtforms import TextField, TextAreaField,  SubmitField, PasswordField, IntegerField, validators
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from models import Event, EventType
 
@@ -32,7 +32,7 @@ class EventForm(Form):
 	start_date = TextField('Start date:')
 	end_date = TextField('End date:')
 	event_type = SelectField('Type', choices=[('pl', 'product launching'), ('be', 'business event'), ('it', 'IT event'), ('cp', 'Christmas party')])
-	budget = SelectField('Type', choices=[('100', '100-500'), ('500', '500-1000')]) 
+	budget = IntegerField("Budget(in LEI RO):", [validators.NumberRange(min=0, max=1000)])
 	nr_persons = IntegerField('Nr. of persons:')
 	description = TextField('Description:')
 	scope = TextField("Scope:") 

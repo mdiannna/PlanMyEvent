@@ -16,10 +16,24 @@ def index():
 def createPackage():
 	return 
 
+
+def validated(s):
+	print s
+	try: 
+		int(s)
+
+		if int(s)<10000:
+			return int(s)
+		return -1
+	except ValueError:
+		return -1	
+
+
 @app.route("/event", methods=['GET', 'POST'])
 def event():
 	form = EventForm(request.form, csrf_enabled=True)
 	# data=[{'name':'Conference'}, {'name':'Class, Training, or Workshop'}, {'name':'IT event'}]
+	error = ""
 
 	data=[]
 	dict = {}
@@ -29,25 +43,25 @@ def event():
 	for i in range(0, len(event_types)):
 		dict['name']=event_types[i].name
 		data.append(dict.copy())
-	# event_type_query = EventType.query.filter_by(name=event_type)
-	print "Event types:" 
-	print  event_types[0].name
-	print "dict name"
-	# print dict['name']
-	# print "data:" + data
-	print "data:"
-	print data
-
-	if request.method == "POST":
-		select = request.form.get('event_type_select')
-		print "Select: " + str(select)
-		# print "Request sent + form data:" + form.event_type.data
-		# return redirect(url_for("/event_options", event_type=form.event_type.data))
-		return redirect(url_for("event_options", event_type=select))
+	
+	
+	
+	if request.method == "POST" :
+		budget = validated(str(form.budget.data))
+		if(budget < 0):
+			error = "Error: Please select a number between 0 and 10000 for your budget"
+		elif budget == 0:
+			error = "# Are you sure you want to organize an event with 0 money?"
+		elif budget>0:
+			select = request.form.get('event_type_select')
+			print "Select: " + str(select)
+			# print "Request sent + form data:" + form.event_type.data
+			# return redirect(url_for("/event_options", event_type=form.event_type.data))
+			return redirect(url_for("event_options", event_type=select))
 
 
 		
-	return render_template("event.html", form=form, data=data)
+	return render_template("event.html", form=form, data=data, error=error)
 
 
 @app.route("/event_options", methods=['GET', 'POST'])
