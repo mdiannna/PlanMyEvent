@@ -54,9 +54,22 @@ def event():
 def event_options():
 	form = EventForm(request.form, csrf_enabled=True)
 
-	event_type = request.args['event_type']
-	event_type_query = EventType.query.filter_by(name=event_type)
-	print "ebvent_type_query:"
-	print event_type_query[0]
+	query_name = request.args['event_type']
+	event_type_query = EventType.query.filter_by(name=query_name)
 	
-	return render_template("event.html", form=form, event_type=event_type_query[0])
+	event_type = event_type_query[0]
+
+	options = []
+	options.append(event_type.venues)
+	options.append(event_type.caterers)
+	options.append(event_type.stylist_decor)
+	options.append(event_type.event_planner)
+	options.append(event_type.entertainment)
+	options.append(event_type.photographer)
+	print "options:"
+	print options
+
+	options_name = ['venues', 'caterers', 'stylist_decor', 'event_planner', 'entertainment', 'photographer']
+	
+	return render_template("event.html", form=form, event_name=event_type_query[0].name, options=options, 
+							options_name=options_name)

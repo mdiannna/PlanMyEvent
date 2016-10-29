@@ -12,12 +12,12 @@
 			<div class = "form-group input">
 				{{form.event_type.label}}
 				{{form.name(class_="form-control", placeholder="Evet type:")}}
-				<p> event:{{event_type.name}}</p>
+				<p> event:{{event_name}}</p>
 			</div>
 
 
 			<div class="input-group">
-				<span class="input-group-addon">Please select</span>
+				<span class="input-group-addon">Event type</span>
 				<select name="event_type_select" class="selectpicker form-control">
 					{% for o in data %}
 					<option value="{{ o.name }}">{{ o.name }}</option>
@@ -25,6 +25,14 @@
 				</select>
 			</div>
 
+			<div>
+				<h2>Options</h2>
+				{% for item in options %}
+					{% if item %}
+					<p>{{options_name[loop.index0]}}</p>
+					{% endif %}
+				{% endfor %}
+			</div>
 
 			<div align="center">
 				{{form.submit(class_="btn btn-primary btn-lg")}}
