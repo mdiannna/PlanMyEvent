@@ -49,7 +49,7 @@ def event():
 	if request.method == "POST" :
 		budget = validated(str(form.budget.data))
 		if(budget < 0):
-			error = "Error: Please select a number between 0 and 10000 for your budget"
+			error = "Please select a number between 0 and 10000 for your budget"
 		elif budget == 0:
 			error = "# Are you sure you want to organize an event with 0 money?"
 		elif budget>0:

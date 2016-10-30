@@ -1,50 +1,93 @@
+  
+{% block styles %}
 
+
+<link rel="stylesheet" href="../static/css/css(1)">
+<link rel="stylesheet" href="../static/css/bootstrap.min.css">
+<link rel="stylesheet" href="../static/css/animate.min.css">
+<link rel="stylesheet" href="../static/css/socicon.min.css">
+<link rel="stylesheet" href="../static/css/style.css">
+<link rel="stylesheet" href="../static/css/style(1).css">
+<link rel="stylesheet" href="../static/css/style(2).css">
+<link rel="stylesheet" href="../static/css/mbr-additional.css" type="text/css">
+
+{% endblock %}
 
 {% block content %}
-<form class="form" action="/event" method="POST">
-	<div class="row">
-		<div class="col-md-6 col-md-offset-3">
-			<H1 align="center">Create new event</H1>	
-			<div class = "form-group input">
-				{{form.name.label}}
-				{{form.name(class_="form-control", placeholder="name...")}}
-			</div>
-			<div class = "form-group input">
-				{{form.event_type.label}}
-				{{form.name(class_="form-control", placeholder="Evet type:")}}
-				<p> event:{{event_name}}</p>
-			</div>
-			<div class = "form-group input">
-				{{form.budget.label}}
-				{{form.budget(class_="form-control", placeholder="name...")}}
-			</div>
 
 
-			<div class="input-group">
-				<span class="input-group-addon">Event type</span>
-				<select name="event_type_select" class="selectpicker form-control">
-					{% for o in data %}
-					<option value="{{ o.name }}">{{ o.name }}</option>
-					{% endfor %}
-				</select>
-			</div>
+<section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="form1-89" style="background-color: rgb(239, 239, 239);">
 
-			<div>
-				<h2>Options</h2>
-				{% for item in options %}
-					{% if item %}
-					<p>{{options_name[loop.index0]}}</p>
-					{% endif %}
-				{% endfor %}
-			</div>
+	<div class="mbr-section__container mbr-section__container--std-padding container">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="row">
+					<div class="col-sm-8 col-sm-offset-2" data-form-type="formoid">
+						<div class="mbr-header mbr-header--center mbr-header--std-padding">
+							<h2 class="mbr-header__text">CREATE NEW EVENT</h2>
+						</div>
+						<div data-form-alert="true"></div>
+						<form class="form" action="/event" method="POST">
 
-			<p>{{error}}</p>
-			
-			<div align="center">
-				{{form.submit(class_="btn btn-primary btn-lg")}}
-			</div>
+							<input type="hidden" value="" data-form-email="true">
+							<div class = "form-group input">
+								{{form.name.label}}
+								{{form.name(class_="form-control", placeholder="")}}
+							</div>
+							<div class = "form-group input">
+								{{form.event_type.label}}
+								{{form.name(class_="form-control", placeholder="")}}
+								<!-- <p> event:{{event_name}}</p> -->
+							</div>
+							<div class = "form-group input">
+								{{form.budget.label}}
+								{{form.budget(class_="form-control", placeholder="")}}
+							</div>
+							<div class = "form-group input">
+								{{form.nr_persons.label}}
+								{{form.nr_persons(class_="form-control", placeholder="")}}
+							</div>
+							<div class = "form-group input">
+								{{form.description.label}}
+								{{form.description(class_="form-control", placeholder="")}}
+							</div>
 
+
+							<div class="input-group">
+								<span class="input-group-addon">Event type</span>
+								<select name="event_type_select" class="selectpicker form-control">
+									{% for o in data %}
+									<option value="{{ o.name }}">{{ o.name }}</option>
+									{% endfor %}
+								</select>
+							</div>
+
+							<div>
+								{% if options %}
+								<h2>We think you will need these components for your event:</h2>
+								{% endif %}
+								{% for item in options %}
+								{% if item %}
+								<p>{{options_name[loop.index0]}}</p>
+								{% endif %}
+								{% endfor %}
+							</div>
+
+							{% if error %}
+							<script type="text/javascript">
+								alert("{{error}}");
+							</script>
+							{% endif %}
+
+							<div align="center" class="mbr-buttons mbr-buttons--right">
+								{{form.submit(class_="btn btn-primary btn-lg")}}
+							</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-</form>
+</section>
 {% endblock %}
