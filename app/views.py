@@ -57,7 +57,7 @@ def event():
 			print "Select: " + str(select)
 			# print "Request sent + form data:" + form.event_type.data
 			# return redirect(url_for("/event_options", event_type=form.event_type.data))
-			return redirect(url_for("event_options", event_type=select))
+			return redirect(url_for("event_options", event_type=select, ))
 
 
 		
